@@ -94,10 +94,7 @@ def cmd_output(
     kwargs.setdefault("stderr", subprocess.PIPE)
     proc = subprocess.Popen(cmd, **kwargs)
     stdout, stderr = proc.communicate()
-    try: stdout = stdout.decode()
-    except: stdout = stdout.decode('ansi')
-    else: print('Нихуя')
-          break
+    stdout = stdout.decode('ansi')
     if expected_code is not None and proc.returncode != expected_code:
         raise CalledProcessError(
             cmd,
